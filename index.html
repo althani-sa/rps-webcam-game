@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rock Paper Scissors</title>
+    <!-- Retro pixel arcade font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="cabinet">
+      <!-- Title bar -->
+      <header class="titlebar">
+        <h1>ROCK <span class="dot">·</span> PAPER <span class="dot">·</span> SCISSORS</h1>
+      </header>
+
+      <!-- Score panel -->
+      <section class="scorepanel">
+        <div class="score">
+          <span class="score-label">YOU</span>
+          <span class="score-num" id="playerScore">0</span>
+        </div>
+        <div class="round-indicator" id="roundIndicator">BEST OF 3</div>
+        <div class="score">
+          <span class="score-num" id="appScore">0</span>
+          <span class="score-label">APP</span>
+        </div>
+      </section>
+
+      <!-- Stage: webcam + canvas overlay live here later -->
+      <section class="stage">
+        <video id="webcam" autoplay muted playsinline></video>
+        <canvas id="overlay"></canvas>
+        <!-- Live readout of the gesture being detected right now -->
+        <div class="live-gesture" id="liveGesture">—</div>
+        <!-- Big "3 2 1 SHOOT" text during a round -->
+        <div class="countdown" id="countdown"></div>
+        <!-- Big result banner shown after each round -->
+        <div class="result-banner" id="resultBanner">
+          <div class="result-headline" id="resultHeadline"></div>
+          <div class="result-detail" id="resultDetail"></div>
+        </div>
+        <div class="stage-placeholder" id="stagePlaceholder">
+          STARTING CAMERA<br /><span>allow camera access when asked</span>
+        </div>
+      </section>
+
+      <!-- Move displays -->
+      <section class="moves">
+        <div class="move-card">
+          <div class="move-title">YOUR MOVE</div>
+          <div class="move-value" id="playerMove">—</div>
+        </div>
+        <div class="versus">VS</div>
+        <div class="move-card">
+          <div class="move-title">APP MOVE</div>
+          <div class="move-value" id="appMove">—</div>
+        </div>
+      </section>
+
+      <!-- Controls -->
+      <section class="controls">
+        <button class="play-btn" id="playBtn">PLAY ROUND</button>
+        <p class="status" id="status">Press PLAY ROUND to start.</p>
+      </section>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
