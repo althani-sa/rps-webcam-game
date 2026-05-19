@@ -85,6 +85,16 @@ body::after {
   color: var(--neon-cyan);
 }
 
+/* Credit line under the title */
+.credit {
+  margin-top: 8px;
+  text-align: center;
+  font-size: 8px;
+  letter-spacing: 1px;
+  color: var(--neon-cyan);
+  text-shadow: 0 0 5px var(--neon-cyan);
+}
+
 /* Sound on/off toggle, tucked in the top-right corner */
 .sound-toggle {
   position: absolute;
