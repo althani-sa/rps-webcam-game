@@ -67,6 +67,10 @@ body::after {
 }
 
 /* ---------- Title bar ---------- */
+.titlebar {
+  position: relative;
+}
+
 .titlebar h1 {
   font-size: 16px;
   line-height: 1.6;
@@ -79,6 +83,33 @@ body::after {
 
 .titlebar .dot {
   color: var(--neon-cyan);
+}
+
+/* Sound on/off toggle, tucked in the top-right corner */
+.sound-toggle {
+  position: absolute;
+  top: -4px;
+  right: 0;
+  font-family: inherit;
+  font-size: 8px;
+  color: var(--neon-cyan);
+  background: #0c0526;
+  border: 2px solid var(--neon-cyan);
+  border-radius: 5px;
+  padding: 7px 9px;
+  cursor: pointer;
+  text-shadow: 0 0 5px var(--neon-cyan);
+}
+
+.sound-toggle:hover {
+  background: #160a36;
+}
+
+/* Dimmed look when sound is off */
+.sound-toggle.off {
+  color: #6a5a9a;
+  border-color: #6a5a9a;
+  text-shadow: none;
 }
 
 /* ---------- Score panel ---------- */

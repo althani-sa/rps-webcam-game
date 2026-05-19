@@ -3,6 +3,7 @@
 
 import "./style.css";
 import { HandLandmarker, FilesetResolver } from "@mediapipe/tasks-vision";
+import { sfx, startBgm, toggleMute } from "./audio.js";
 
 // ---- Grab the page elements we need ----
 const video = document.getElementById("webcam");
@@ -21,6 +22,7 @@ const appMoveEl = document.getElementById("appMove");
 const playerScoreEl = document.getElementById("playerScore");
 const appScoreEl = document.getElementById("appScore");
 const roundIndicatorEl = document.getElementById("roundIndicator");
+const soundToggle = document.getElementById("soundToggle");
 const playerCardEl = playerMoveEl.closest(".move-card");
 const appCardEl = appMoveEl.closest(".move-card");
 
@@ -203,6 +205,7 @@ async function showCountdownStep(text) {
   countdownEl.classList.remove("show");
   void countdownEl.offsetWidth; // restart the pop animation
   countdownEl.classList.add("show");
+  sfx(text === "SHOOT!" ? "shoot" : "tick"); // matching beep
   await sleep(650);
 }
 
@@ -288,7 +291,7 @@ async function playRound() {
 
   // Decide who won the round.
   const result = decideWinner(playerMove, appMove);
-  let headline, headlineClass, detail;
+  let headline, headlineClass, detail, soundName;
 
   if (result === "player") {
     playerScore++;
@@ -299,6 +302,7 @@ async function playRound() {
     headline = "YOU WIN THE ROUND";
     headlineClass = "win";
     detail = `${MOVE_ICONS[playerMove]} beats ${MOVE_ICONS[appMove]}`;
+    soundName = "win";
   } else if (result === "app") {
     appScore++;
     appScoreEl.textContent = String(appScore);
@@ -308,11 +312,13 @@ async function playRound() {
     headline = "APP WINS THE ROUND";
     headlineClass = "lose";
     detail = `${MOVE_ICONS[appMove]} beats ${MOVE_ICONS[playerMove]}`;
+    soundName = "lose";
   } else {
     statusEl.textContent = "Tie — nobody scores.";
     headline = "TIE ROUND";
     headlineClass = "tie";
     detail = `Both picked ${MOVE_ICONS[playerMove]}`;
+    soundName = "tie";
   }
 
   // Check whether the best-of-3 match is over.
@@ -328,15 +334,29 @@ async function playRound() {
     headline = youWon ? "🏆 YOU WIN THE MATCH!" : "APP WINS THE MATCH";
     headlineClass = youWon ? "win" : "lose";
     detail = `Final score — You ${playerScore} : ${appScore} App`;
+    soundName = youWon ? "matchWin" : "matchLose";
   }
 
   showResultBanner(headline, headlineClass, detail);
+  sfx(soundName); // play the round / match result sound
 
   playBtn.disabled = false;
   roundInProgress = false;
 }
 
-playBtn.addEventListener("click", playRound);
+playBtn.addEventListener("click", () => {
+  startBgm(); // start music on first interaction (browsers need a gesture)
+  sfx("click");
+  playRound();
+});
+
+// Sound on/off toggle in the title bar.
+soundToggle.addEventListener("click", () => {
+  startBgm(); // keep music running so unmuting is instant
+  const muted = toggleMute();
+  soundToggle.textContent = muted ? "♪ OFF" : "♪ ON";
+  soundToggle.classList.toggle("off", muted);
+});
 
 // ============================================================
 // Start everything
