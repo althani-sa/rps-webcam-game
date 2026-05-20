@@ -401,3 +401,81 @@ body::after {
   color: var(--text);
   text-align: center;
 }
+
+/* ============================================================
+   Mobile / narrow-screen layout — shrink everything so the game
+   fits on a phone without horizontal scroll.
+   ============================================================ */
+@media (max-width: 560px) {
+  body {
+    padding: 8px;
+    align-items: flex-start;
+  }
+  .cabinet {
+    padding: 12px;
+    gap: 12px;
+    border-radius: 10px;
+  }
+  .titlebar h1 {
+    font-size: 11px;
+  }
+  .credit {
+    font-size: 7px;
+  }
+  .sound-toggle {
+    font-size: 7px;
+    padding: 5px 7px;
+    top: -2px;
+  }
+  .scorepanel {
+    padding: 10px 12px;
+  }
+  .score {
+    gap: 8px;
+  }
+  .score-label {
+    font-size: 8px;
+  }
+  .score-num {
+    font-size: 18px;
+  }
+  .round-indicator {
+    font-size: 7px;
+  }
+  .move-card {
+    padding: 10px 6px;
+  }
+  .move-title {
+    font-size: 7px;
+    margin-bottom: 8px;
+  }
+  .move-value {
+    font-size: 11px;
+  }
+  .versus {
+    font-size: 10px;
+  }
+  .play-btn {
+    font-size: 11px;
+    padding: 12px 18px;
+  }
+  .status {
+    font-size: 7px;
+  }
+  .live-gesture {
+    font-size: 7px;
+    padding: 6px 8px;
+  }
+  .countdown {
+    font-size: 44px;
+  }
+  .result-headline {
+    font-size: 20px;
+  }
+  .result-detail {
+    font-size: 10px;
+  }
+  .stage-placeholder {
+    font-size: 10px;
+  }
+}

@@ -63,7 +63,11 @@ async function createHandLandmarker() {
 
 // Turn on the webcam and size the canvas to match it.
 async function startWebcam() {
-  const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+  // facingMode: "user" → front/selfie camera on phones. "ideal" lets it
+  // fall back gracefully on laptops that don't label their camera.
+  const stream = await navigator.mediaDevices.getUserMedia({
+    video: { facingMode: { ideal: "user" } },
+  });
   video.srcObject = stream;
   await new Promise((resolve) => {
     video.onloadedmetadata = () => {
